@@ -20,6 +20,7 @@ pub const TCSADRAIN: c_int = 1;
 pub const TCSAFLUSH: c_int = 2;
 
 #[repr(C)]
+#[derive(Clone)]
 pub struct Termios {
     pub c_iflag: c_uint,
     pub c_oflag: c_uint,

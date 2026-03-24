@@ -14,15 +14,17 @@ pub struct Gti {
 impl Gti {
     pub fn new() -> io::Result<Self> {
         let tty_fd = get_raw_fd()?;
+        let canon = get_gti(tty_fd)?;
+        let mut to_be_raw = canon.clone();
+        unsafe { ffi::cfmakeraw(&mut to_be_raw) }
         Ok(Gti {
             tty_fd: tty_fd,
-            raw: get_gti(tty_fd)?,
-            canon: get_gti(tty_fd)?,
+            raw: to_be_raw,
+            canon: canon,
         })
     }
 
     pub fn turn_terminal_raw_mode_on(&mut self) -> io::Result<()> {
-        unsafe { ffi::cfmakeraw(&mut self.raw) }
         if unsafe { ffi::tcsetattr(self.tty_fd, ffi::TCSANOW, &self.raw) } == -1 {
             return Err(io::Error::last_os_error());
         }
