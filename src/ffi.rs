@@ -25,7 +25,6 @@ pub struct Termios {
     pub c_oflag: c_uint,
     pub c_cflag: c_uint,
     pub c_lflag: c_uint,
-    // pub c_line: c_uchar,
     pub c_cc: [c_uchar; NCCS],
 }
 
@@ -36,9 +35,6 @@ pub struct EpollEvent {
 }
 
 unsafe extern "C" {
-    /// Creates a new epoll instance.
-    ///
-    /// Returns a file descriptor referring to the new epoll instance.
     pub fn epoll_create1(flags: c_int) -> c_int;
     pub fn epoll_ctl(epfd: c_int, op: c_int, fd: c_int, event: *mut EpollEvent) -> c_int;
     pub fn epoll_wait(
