@@ -1,6 +1,6 @@
 pub mod event;
-pub mod ffi;
-pub mod termios;
+mod ffi;
+mod termios;
 
 use event::{DEF_TIMEOUT, EVENT_TYPES, Event, Events, KeyEvent, MAX_EVENTS, TERMINAL_EVENT_ID};
 
@@ -58,7 +58,7 @@ impl TtyListener {
         Ok(KeyEvent::Undefined)
     }
 
-    pub fn read_event(&self) -> Result<KeyEvent> {
+    fn read_event(&self) -> Result<KeyEvent> {
         let mut tty_buffer: [u8; 1024] = [0u8; termios::TTY_BUFFER_SIZE];
 
         let read_count = unsafe {
