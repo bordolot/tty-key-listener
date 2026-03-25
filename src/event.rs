@@ -18,7 +18,7 @@ pub(crate) fn identify_event(buffer: &[u8]) -> KeyEvent {
             return KeyEvent::ArrowDown;
         }
         if buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 67 {
-            return KeyEvent::ArrowRigt;
+            return KeyEvent::ArrowRight;
         }
         if buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 68 {
             return KeyEvent::ArrowLeft;
@@ -33,7 +33,7 @@ pub(crate) fn identify_event(buffer: &[u8]) -> KeyEvent {
 pub enum KeyEvent {
     ArrowUp,
     ArrowDown,
-    ArrowRigt,
+    ArrowRight,
     ArrowLeft,
     KeyChar(char),
     Undefined,
