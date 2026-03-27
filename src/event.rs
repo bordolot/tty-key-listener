@@ -1,6 +1,6 @@
 use std::os::raw::{c_int, c_uint, c_ulong};
 
-pub(crate) type Event = crate::ffi::EpollEvent;
+pub(crate) type Event = crate::ffi::epoll_event;
 pub(crate) type Events = Vec<Event>;
 
 pub(crate) const TERMINAL_EVENT_ID: c_ulong = 1;

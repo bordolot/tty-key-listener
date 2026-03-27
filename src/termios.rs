@@ -7,8 +7,8 @@ pub const TTY_BUFFER_SIZE: usize = 1_024;
 /// General terminal interface
 pub struct Gti {
     tty_fd: RawFd,
-    raw: ffi::Termios,
-    canon: ffi::Termios,
+    raw: ffi::termios,
+    canon: ffi::termios,
 }
 
 impl Gti {
@@ -44,9 +44,9 @@ pub fn get_raw_fd() -> io::Result<i32> {
 }
 
 /// get a general terminal interface
-pub fn get_gti(raw_dsc: RawFd) -> io::Result<ffi::Termios> {
+pub fn get_gti(raw_dsc: RawFd) -> io::Result<ffi::termios> {
     unsafe {
-        let mut termios: ffi::Termios = std::mem::zeroed();
+        let mut termios: ffi::termios = std::mem::zeroed();
         if ffi::tcgetattr(raw_dsc, &mut termios) == -1 {
             return Err(io::Error::last_os_error());
         }
